@@ -1,0 +1,128 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      background-color: #fff;
+      line-height: 1.6;
+
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .full-table {
+      display: table;
+      height: 100%;
+      width: 100%;
+    }
+
+    .table-cell {
+      display: table-cell;
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    .card {
+      padding: 10px 25px 10px 25px;
+      border-radius: 10px;
+      background: #009688;
+      color: #fff;
+      display: inline-block;
+    }
+
+    .clock {
+      display: inline-block;
+      font-family: 'Roboto', sans-serif;
+      font-weight: bold;
+      font-size: 1.2em;
+      /* padding-left: 20px; */
+    }
+
+    .time {
+      display: inline-block;
+      min-width: 37px;
+    }
+
+    .colon {
+      font-size: 1.1em;
+      display: inline-block;
+    }
+
+    .date {
+      display: block;
+      min-width: 162px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2em;
+    }
+
+    .greet {
+
+      min-width: 162px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+
+<body>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Roboto:400,700" rel="stylesheet">
+
+  <div class="full-table">
+    <div class="table-cell">
+
+      <div class="card">
+        <div class="greet" id="greet"></div>
+        <div class="date" id="date"></div>
+        <div class="clock">
+          <div class="time" id="hour"></div>
+          <div class="colon">:</div>
+          <div class="time" id="min"></div>
+          <div class="colon">:</div>
+          <div class="time" id="sec"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function date() {
+      var today = new Date();
+      document.getElementById('date').innerHTML = new Intl.DateTimeFormat('pt-BR', { weekday: 'short', day: 'numeric', month: "short", year: 'numeric' }).format(today);
+    }
+
+
+    function clock() {
+      var today = new Date();
+
+      hrs = today.getHours();
+      if (hrs < 12)
+        greet = 'Good Morning, Sidinei ';
+      else if (hrs >= 12 && hrs <= 17)
+        greet = 'Good Afternoon, Sidinei ';
+      else if (hrs >= 17 && hrs <= 24)
+        greet = 'Good Evening, Sidinei  ';
+      document.getElementById('greet').innerHTML = greet;
+      document.getElementById('hour').innerHTML = new Intl.DateTimeFormat('pt-BR', { hour: '2-digit' }).format(today);
+      document.getElementById('min').innerHTML = new Intl.DateTimeFormat('pt-BR', { minute: '2-digit' }).format(today);
+      document.getElementById('sec').innerHTML = new Intl.DateTimeFormat('pt-BR', { second: '2-digit' }).format(today);
+    }
+
+
+    function dateTime() {
+      date();
+      clock();
+      setTimeout(dateTime, 500);
+    }
+
+    dateTime()
+  </script>
+</body>
+
+</html>
